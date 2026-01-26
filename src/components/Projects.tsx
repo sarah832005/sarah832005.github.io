@@ -22,9 +22,9 @@ type Project = {
   concepts: string[];
   tools: string[];
 
-  github?: string; // ✅ code (repo)
+  github?: string; // repo code
   demo?: string;   // HTML
-  report?: string; // PDF
+  report?: string; // PDF (dans /public)
 };
 
 const DOMAINS: Array<Domain | "Tous"> = [
@@ -40,8 +40,7 @@ const DOMAINS: Array<Domain | "Tous"> = [
   "Business / Marketing / Gestion",
 ];
 
-// ✅ IMPORTANT: on utilise des liens RELATIFS (pas "/reports/...").
-// Comme ça ça marche en local ET sur GitHub Pages (basePath).
+// ✅ liens RELATIFS => OK en local + GitHub Pages
 const PROJECTS: Project[] = [
   {
     title: "Portfolio — Fondée.",
@@ -49,20 +48,20 @@ const PROJECTS: Project[] = [
     year: "2026",
     status: "En cours",
     domain: "Web & Applications",
-    what: "Portfolio structuré (Next.js) et déployé sur GitHub Pages pour présenter mon profil, mes compétences et mes projets.",
+    what: "Portfolio Next.js déployé sur GitHub Pages pour présenter mon profil, mes compétences et mes projets.",
     concepts: ["UI/UX", "Composants réutilisables", "Navigation one-page", "Accessibilité"],
     tools: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    github: "", // ✅ ton repo portfolio (optionnel)
-    demo: "",   // ✅ lien GitHub Pages du portfolio (optionnel)
+    github: "https://github.com/sarah832005/sarah832005.github.io",
+    demo: "https://sarah832005.github.io",
   },
 
   {
     title: "Dataviz — Netflix Titles",
-    subtitle: "Analyse exploratoire + visualisations (rapport HTML + PDF) — code sur GitHub",
+    subtitle: "Analyse exploratoire + visualisations (rapport HTML + PDF)",
     year: "2025",
     status: "Terminé",
     domain: "Data / Stat / Dataviz",
-    what: "Exploration du dataset Netflix (films/séries) : nettoyage, statistiques descriptives et visualisations (années, pays, durées, ratings).",
+    what: "Exploration du dataset Netflix : nettoyage, statistiques descriptives et visualisations (années, pays, durées, ratings).",
     concepts: [
       "Nettoyage & préparation des données",
       "Statistiques descriptives",
@@ -71,18 +70,17 @@ const PROJECTS: Project[] = [
     ],
     tools: ["Python", "Pandas", "Matplotlib", "Seaborn", "Jupyter"],
     github: "https://github.com/sarah832005/dataviz-project/blob/main/notebooks/netflix.ipynb",
-
     demo: "reports/dashboard_netflix.html",
     report: "reports/rapport_projet_datavisualisation.pdf",
   },
 
   {
     title: "Dataviz — World Happiness (2015–2019)",
-    subtitle: "Analyses multi-années + tendances + corrélations (rapport HTML + PDF) — code sur GitHub",
+    subtitle: "Analyses multi-années + tendances + corrélations (rapport HTML + PDF)",
     year: "2025",
     status: "Terminé",
     domain: "Data / Stat / Dataviz",
-    what: "Analyse des scores de bonheur sur plusieurs années (2015–2019) : comparaisons par pays, tendances temporelles et exploration des facteurs associés.",
+    what: "Analyse des scores de bonheur (2015–2019) : comparaisons par pays, tendances et exploration des facteurs associés.",
     concepts: [
       "Fusion multi-fichiers (2015–2019)",
       "Comparaisons par année/pays",
@@ -91,9 +89,26 @@ const PROJECTS: Project[] = [
     ],
     tools: ["Python", "Pandas", "Matplotlib", "Seaborn", "Jupyter"],
     github: "https://github.com/sarah832005/dataviz-project/blob/main/notebooks/world_happiness.ipynb",
-
     demo: "reports/dashboard_world_happiness.html",
     report: "reports/rapport_projet_datavisualisation.pdf",
+  },
+
+  {
+    title: "Mini SI — Medical Project (Gestion cabinet)",
+    subtitle: "Gestion patients + RDV + ordonnances (fichiers texte)",
+    year: "2026",
+    status: "Terminé",
+    domain: "Systèmes d’information (SI)",
+    what: "Application CLI Python : gestion des patients, rendez-vous, ordonnances, historique et graphiques (consultations/mois/année).",
+    concepts: [
+      "CRUD fichiers (TXT)",
+      "Validation des entrées (CIN, date, heure)",
+      "Historisation (fichiers history_*)",
+      "Statistiques + visualisation",
+    ],
+    tools: ["Python", "File I/O", "Matplotlib", "Jupyter"],
+    github: "https://github.com/sarah832005/medical-project/blob/main/medical_project.ipynb",
+    report: "reports/medical/rapport_medical_project.pdf",
   },
 
   {
@@ -105,7 +120,6 @@ const PROJECTS: Project[] = [
     what: "Analyse des besoins, conception UML (use case, classes…) puis traduction en code orienté objet.",
     concepts: ["Use case", "Diagramme de classes", "Encapsulation", "Héritage", "Polymorphisme"],
     tools: ["StarUML", "Java"],
-    report: "", // si tu as un pdf plus tard
   },
 ];
 
@@ -130,11 +144,9 @@ export default function Projects() {
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">
-              Projets
-            </h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">Projets</h2>
             <p className="mt-2 text-slate-600">
-              Projets organisés par domaines — avec un focus SI et une touche data.
+              Projets organisés par domaines — avec une touche data et une approche “pro” (code + rapports).
             </p>
           </div>
 
@@ -146,7 +158,6 @@ export default function Projects() {
           </a>
         </div>
 
-        {/* Filtres domaines */}
         <div className="mt-8 flex flex-wrap gap-2">
           {DOMAINS.map((d) => {
             const isActive = d === selected;
@@ -169,7 +180,6 @@ export default function Projects() {
           })}
         </div>
 
-        {/* Cards */}
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {filtered.map((p) => (
             <article
@@ -198,8 +208,7 @@ export default function Projects() {
               </div>
 
               <p className="mt-4 text-slate-700">
-                <span className="font-semibold text-slate-900">Sujet :</span>{" "}
-                {p.what}
+                <span className="font-semibold text-slate-900">Sujet :</span> {p.what}
               </p>
 
               <div className="mt-4">
@@ -244,10 +253,10 @@ export default function Projects() {
                     rel="noreferrer"
                     className="text-sm font-medium text-indigo-700 hover:text-indigo-800"
                   >
-                    Code (GitHub) →
+                    GitHub →
                   </a>
                 ) : (
-                  <span className="text-sm text-slate-400">Code (GitHub) (optionnel)</span>
+                  <span className="text-sm text-slate-400">GitHub (optionnel)</span>
                 )}
 
                 {p.demo ? (
@@ -281,8 +290,7 @@ export default function Projects() {
         </div>
 
         <p className="mt-10 text-sm text-slate-500">
-          Pour éviter les bugs GitHub Pages, utilise des liens relatifs comme{" "}
-          <span className="font-medium">"reports/..."</span>.
+          GitHub Pages : privilégie des liens relatifs comme <span className="font-medium">"reports/..."</span>.
         </p>
       </div>
     </section>
