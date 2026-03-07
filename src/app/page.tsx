@@ -21,7 +21,7 @@ export default function Home() {
       <Formation />
       <Skills />
       <Projects />
-      <Experience />
+      <Research />
       <Experience />
       <Certifications />
       <Contact />
@@ -31,13 +31,13 @@ export default function Home() {
           <span>© {new Date().getFullYear()} Sarah Mahmoudi —</span>
 
           <span className="relative h-9 w-9 overflow-hidden rounded-lg bg-white ring-1 ring-slate-200">
-  <Image
-    src="/logo.png"
-    alt="Fondée logo"
-    fill
-    className="object-cover object-center scale-[1.9]"
-  />
-</span>
+            <Image
+              src="/logo.png"
+              alt="Fondée logo"
+              fill
+              className="object-cover object-center scale-[1.9]"
+            />
+          </span>
 
           <span>Fondée.</span>
         </div>
