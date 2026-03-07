@@ -22,9 +22,9 @@ type Project = {
   concepts: string[];
   tools: string[];
 
-  github?: string; // repo code
-  demo?: string;   // HTML
-  report?: string; // PDF (dans /public)
+  github?: string; // repo code / fichier notebook (lien GitHub)
+  demo?: string;   // HTML (dans /public => lien relatif)
+  report?: string; // PDF (dans /public => lien relatif)
 };
 
 const DOMAINS: Array<Domain | "Tous"> = [
@@ -109,6 +109,28 @@ const PROJECTS: Project[] = [
     tools: ["Python", "File I/O", "Matplotlib", "Jupyter"],
     github: "https://github.com/sarah832005/medical-project/blob/main/medical_project.ipynb",
     report: "reports/medical/rapport_medical_project.pdf",
+  },
+
+  // ✅ NOUVEAU : PROJET SQL AVANCÉ (avec lien rapport)
+  {
+    title: "Base de données E-commerce — shopdb",
+    subtitle: "SQL avancé : schéma complet + vues + procédures + triggers",
+    year: "2025",
+    status: "Terminé",
+    domain: "Bases de données & BI",
+    what: "Conception et implémentation d’une base e-commerce complète : comptes multi-rôles, catalogue, panier, commandes, paiements/factures, livraison, stock et reporting.",
+    concepts: [
+      "Modélisation relationnelle (PK/FK)",
+      "Rôles & utilisateurs (client, vendeur, livreur, financier…)",
+      "Vues SQL (stats ventes, comportement client, performance produits, rapports financiers)",
+      "Procédure stockée (ajout ligne commande)",
+      "Triggers métier (mise à jour stock, statut produit)",
+      "Indexation (optimisation des requêtes)",
+    ],
+    tools: ["SQL (MySQL/MariaDB)","StarUML", "Views", "Stored Procedures", "Triggers", "Index"],
+   
+     github: "https://github.com/sarah832005/shopdb-ecommerce",
+    report: "reports/sql/rapport_shopdb.pdf",
   },
 
   {

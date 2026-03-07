@@ -9,6 +9,7 @@ import Formation from "../components/Formation";
 import Projects from "../components/Projects";
 import Image from "next/image";
 import Skills from "../components/Skills";
+import Research from "../components/Research";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Formation />
       <Skills />
       <Projects />
+      <Experience />
       <Experience />
       <Certifications />
       <Contact />

@@ -7,6 +7,7 @@ export default function Navbar() {
     { label: "Formation", href: "#formation" },
     { label: "Compétences", href: "#skills" },
     { label: "Projets", href: "#projects" },
+    { label: "Recherche", href: "#research" },
     { label: "Expériences", href: "#experience" },
     { label: "Attestations", href: "#certifications" },
     { label: "Contact", href: "#contact" },
