@@ -1,13 +1,27 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+function useInView(threshold = 0.1) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      { threshold }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [threshold]);
+  return { ref, visible };
+}
 
 type Attestation = {
   title: string;
   org: string;
-  desc: string;          // brève idée
-  logo?: string;         // ex: "/logos/openclassrooms.svg"
-  file?: string;         // ex: "/attestations/public-speaking.pdf"
+  desc: string;
+  logo?: string;
+  file?: string;
 };
 
 const VIE_ASSOCIATIVE: Attestation[] = [
@@ -16,19 +30,19 @@ const VIE_ASSOCIATIVE: Attestation[] = [
     org: "Vie associative",
     desc: "Engagement régulier, participation active et contribution aux activités.",
     logo: "/association.png",
-    file: "", // à remplir plus tard
+    file: "",
   },
   {
-    title: "Contribution au comité d’organisation",
+    title: "Contribution au comité d'organisation",
     org: "ESB / Organisation",
-    desc: "Participation à la coordination, logistique et préparation d’événements.",
+    desc: "Participation à la coordination, logistique et préparation d'événements.",
     logo: "/esb.png",
     file: "/attestations/com org.pdf",
   },
   {
     title: "Prise de parole en public",
     org: "Activités associatives",
-    desc: "Interventions en public, structuration d’idées et aisance orale.",
+    desc: "Interventions en public, structuration d'idées et aisance orale.",
     logo: "/openclassrooms.png",
     file: "/attestations/public-speaking.pdf",
   },
@@ -42,7 +56,7 @@ const VIE_ASSOCIATIVE: Attestation[] = [
   {
     title: "Apprendre à apprendre",
     org: "Développement personnel",
-    desc: "Méthodes d’apprentissage, autonomie, organisation et progression.",
+    desc: "Méthodes d'apprentissage, autonomie, organisation et progression.",
     logo: "/openclassrooms.png",
     file: "/attestations/apprendre.pdf",
   },
@@ -79,75 +93,61 @@ const ACADEMIQUE_PRO: Attestation[] = [
   },
 ];
 
-function Card({ item }: { item: Attestation }) {
+function Card({ item, index, visible }: { item: Attestation; index: number; visible: boolean }) {
   const isReady = Boolean(item.file && item.file.trim().length > 0);
-
-  // Si pas encore de PDF, on désactive le clic
-  const Wrapper: any = isReady ? "a" : "div";
+  const Wrapper = isReady ? "a" : "div";
   const wrapperProps = isReady
-    ? {
-        href: item.file,
-        target: "_blank",
-        rel: "noreferrer",
-        download: true,
-      }
+    ? { href: item.file, target: "_blank", rel: "noreferrer" as const, download: true }
     : {};
 
   return (
     <Wrapper
-      {...wrapperProps}
-      className={`group block rounded-2xl border p-5 transition ${
+      {...(wrapperProps as any)}
+      className={`group block rounded-2xl border p-6 transition-all duration-300 ${
         isReady
-          ? "border-slate-200 bg-slate-50 hover:bg-white hover:shadow-sm"
-          : "border-slate-200 bg-slate-50 opacity-70 cursor-not-allowed"
+          ? "border-slate-200 bg-white hover:border-indigo-200 hover:shadow-md cursor-pointer"
+          : "border-slate-100 bg-slate-50 opacity-60 cursor-not-allowed"
       }`}
+      style={{
+        opacity: visible ? (isReady ? 1 : 0.6) : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 0.6s ease ${0.1 + index * 0.08}s, transform 0.6s ease ${0.1 + index * 0.08}s, box-shadow 0.3s, border-color 0.3s`,
+      }}
     >
       <div className="flex items-start gap-4">
         {/* Logo */}
-        <div className="h-12 w-12 rounded-xl border border-slate-200 bg-white flex items-center justify-center overflow-hidden shrink-0">
+        <div className="h-11 w-11 rounded-xl border border-slate-100 bg-slate-50 flex items-center justify-center overflow-hidden shrink-0">
           {item.logo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={item.logo}
-              alt={`Logo ${item.org}`}
-              className="h-full w-full object-contain p-2"
-              loading="lazy"
-            />
+            <img src={item.logo} alt={`Logo ${item.org}`} className="h-full w-full object-contain p-2" loading="lazy" />
           ) : (
-            <span className="text-xs text-slate-400">Logo</span>
+            <span className="text-[10px] text-slate-300">—</span>
           )}
         </div>
 
-        <div className="min-w-0 flex-1">
+        <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0">
-              <p className="font-semibold text-slate-900 truncate">
-                {item.title}
+            <div>
+              <p className="text-sm font-semibold text-slate-800 leading-snug">{item.title}</p>
+              <p
+                className="text-[11px] text-slate-400 mt-0.5"
+                style={{ fontFamily: "'DM Mono', monospace" }}
+              >
+                {item.org}
               </p>
-              <p className="mt-1 text-sm text-slate-600">{item.org}</p>
             </div>
-
-            {/* Badge */}
             <span
-              className={`shrink-0 rounded-full px-3 py-1 text-xs border ${
+              className={`shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full border transition-all duration-200 ${
                 isReady
-                  ? "border-slate-900 text-slate-900 bg-white"
-                  : "border-slate-200 text-slate-400 bg-white"
+                  ? "border-slate-200 text-slate-600 bg-white group-hover:border-indigo-200 group-hover:text-indigo-600 group-hover:bg-indigo-50"
+                  : "border-slate-100 text-slate-300 bg-white"
               }`}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              {isReady ? "Télécharger" : "À ajouter"}
+              {isReady ? "↓ PDF" : "À venir"}
             </span>
           </div>
-
-          {/* Description */}
-          <p className="mt-3 text-sm text-slate-600">{item.desc}</p>
-
-          {/* Hint */}
-          <p className="mt-3 text-xs text-slate-500">
-            {isReady
-              ? "Cliquez pour ouvrir/télécharger la preuve."
-              : "À ajouter : PDF ou lien (vous pourrez le rendre cliquable)."}
-          </p>
+          <p className="text-xs text-slate-500 mt-2 leading-relaxed">{item.desc}</p>
         </div>
       </div>
     </Wrapper>
@@ -155,56 +155,88 @@ function Card({ item }: { item: Attestation }) {
 }
 
 export default function Certifications() {
+  const { ref, visible } = useInView();
   const [activeTab, setActiveTab] = useState<"asso" | "acad">("asso");
-
-  const data = useMemo(
-    () => (activeTab === "asso" ? VIE_ASSOCIATIVE : ACADEMIQUE_PRO),
-    [activeTab]
-  );
+  const data = useMemo(() => (activeTab === "asso" ? VIE_ASSOCIATIVE : ACADEMIQUE_PRO), [activeTab]);
 
   return (
-    <section id="certifications" className="bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">
-          Attestations
-        </h2>
+    <section id="certifications" ref={ref} className="relative bg-white py-24 px-6 overflow-hidden">
+      {/* Dot grid */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: "radial-gradient(circle, #cbd5e118 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
 
-       
-
-        {/* Tabs */}
-        <div className="mt-8 flex gap-3">
-          <button
-            onClick={() => setActiveTab("asso")}
-            className={`rounded-xl px-5 py-2 text-sm font-medium border transition ${
-              activeTab === "asso"
-                ? "bg-slate-900 text-white border-slate-900"
-                : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
-            }`}
+      <div className="relative mx-auto max-w-6xl">
+        {/* Header */}
+        <div
+          className="mb-14"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}
+        >
+          <p
+            className="text-[11px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-4"
+            style={{ fontFamily: "'DM Mono', 'Courier New', monospace" }}
           >
-            Vie associative
-          </button>
-
-          <button
-            onClick={() => setActiveTab("acad")}
-            className={`rounded-xl px-5 py-2 text-sm font-medium border transition ${
-              activeTab === "acad"
-                ? "bg-slate-900 text-white border-slate-900"
-                : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
-            }`}
+            Attestations & certifications
+          </p>
+          <h2
+            className="text-4xl sm:text-5xl font-bold text-slate-900 leading-[1.1] max-w-xl mb-4"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif", letterSpacing: "-0.02em" }}
           >
-            Académique & professionnel
-          </button>
+            Preuves &{" "}
+            <span className="relative inline-block">
+              engagements.
+              <span
+                className="absolute left-0 -bottom-1 h-[2.5px] w-full rounded-full"
+                style={{ background: "linear-gradient(90deg, #6366f1, #3b82f6)" }}
+              />
+            </span>
+          </h2>
+          <div className="mt-6 flex items-center gap-4">
+            <div className="h-px w-8 bg-slate-200" />
+            <span
+              className="text-[10px] uppercase tracking-[0.25em] text-slate-300"
+              style={{ fontFamily: "'DM Mono', monospace" }}
+            >
+              Académique · Associatif · Personnel
+            </span>
+            <div className="h-px flex-1 bg-slate-100" />
+          </div>
         </div>
 
-        {/* Grid */}
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {data.map((item) => (
-            <Card key={`${item.title}-${item.org}`} item={item} />
+        {/* Tabs */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {(["asso", "acad"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className="text-xs font-semibold px-5 py-2.5 rounded-full border transition-all duration-200"
+              style={{
+                background: activeTab === tab ? "#0f172a" : "#ffffff",
+                color: activeTab === tab ? "#ffffff" : "#64748b",
+                borderColor: activeTab === tab ? "#0f172a" : "#e2e8f0",
+                fontFamily: "'DM Mono', monospace",
+              }}
+            >
+              {tab === "asso" ? "Vie associative" : "Académique & professionnel"}
+            </button>
           ))}
         </div>
 
-        {/* Petit rappel */}
-        
+        {/* Grid */}
+        <div className="grid gap-4 md:grid-cols-2">
+          {data.map((item, i) => (
+            <Card key={`${item.title}-${item.org}`} item={item} index={i} visible={visible} />
+          ))}
+        </div>
       </div>
     </section>
   );
