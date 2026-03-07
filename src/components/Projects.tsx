@@ -96,7 +96,7 @@ const PROJECTS: Project[] = [
     tools: ["Python", "scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter"],
     github: "https://github.com/sarah832005/vr-cybersickness-ml",
     notebook: "https://github.com/sarah832005/vr-cybersickness-ml/blob/main/notebooks/",
-    doc: "https://sarah832005.github.io/vr-cybersickness-ml/vr_ml_documentation.html",
+    doc: "https://sarah832005.github.io/vr-cybersickness-ml/docs/vr_ml_documentation.html",
   },
   {
     title: "Conception UML — Système orienté objet",
