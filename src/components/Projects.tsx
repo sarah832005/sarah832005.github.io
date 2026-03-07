@@ -25,7 +25,7 @@ type Domain =
 type Project = {
   title: string; subtitle: string; year: string; status: ProjectStatus;
   domain: Domain; what: string; concepts: string[]; tools: string[];
-  github?: string; demo?: string; report?: string;
+  github?: string; demo?: string; report?: string; doc?: string; notebook?: string;
 };
 
 const DOMAINS: Array<Domain | "Tous"> = [
@@ -86,6 +86,17 @@ const PROJECTS: Project[] = [
     tools: ["SQL (MySQL/MariaDB)", "StarUML", "Views", "Stored Procedures", "Triggers", "Index"],
     github: "https://github.com/sarah832005/shopdb-ecommerce",
     report: "reports/sql/rapport_shopdb.pdf",
+  },
+  {
+    title: "Prédiction Cybersickness — ML Supervisé & Non Supervisé",
+    subtitle: "Classification · Régression · PCA · K-Means · 300 participants VR",
+    year: "2025", status: "Terminé", domain: "IA / Machine Learning",
+    what: "Pipeline ML complet pour prédire le niveau de cybersickness à partir de données terrain réelles (100+ participants en session VR). Classification supervisée (96.7% accuracy), régression SSQ, PCA et clustering K-Means — 4 profils utilisateurs identifiés.",
+    concepts: ["Classification supervisée", "Régression", "PCA", "K-Means Clustering", "Feature Importance", "Cross-validation", "EDA"],
+    tools: ["Python", "scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter"],
+    github: "https://github.com/sarah832005/vr-cybersickness-ml",
+    notebook: "https://github.com/sarah832005/vr-cybersickness-ml/blob/main/notebooks/",
+    doc: "https://sarah832005.github.io/vr-cybersickness-ml/vr_ml_documentation.html",
   },
   {
     title: "Conception UML — Système orienté objet",
@@ -290,9 +301,11 @@ export default function Projects() {
               </div>
 
               {/* Links */}
-              {(p.github || p.demo || p.report) && (
+              {(p.github || p.demo || p.report || p.doc || p.notebook) && (
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                   {p.github && <LinkButton href={p.github} label="GitHub" icon="⌥" />}
+                  {p.notebook && <LinkButton href={p.notebook} label="Notebook" icon="⌨" />}
+                  {p.doc && <LinkButton href={p.doc} label="Documentation" icon="⊡" />}
                   {p.demo && <LinkButton href={p.demo} label="Rapport HTML" icon="⊞" />}
                   {p.report && <LinkButton href={p.report} label="PDF" icon="↓" />}
                 </div>
