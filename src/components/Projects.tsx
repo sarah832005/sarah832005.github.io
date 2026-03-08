@@ -25,7 +25,7 @@ type Domain =
 type Project = {
   title: string; subtitle: string; year: string; status: ProjectStatus;
   domain: Domain; what: string; concepts: string[]; tools: string[];
-  github?: string; demo?: string; report?: string; doc?: string; notebook?: string; pbix?: string;
+  github?: string; demo?: string; report?: string; doc?: string; notebook?: string; pbix?: string; mailto?: string;
 };
 
 const DOMAINS: Array<Domain | "Tous"> = [
@@ -61,6 +61,16 @@ const PROJECTS: Project[] = [
     what: "Application web full-stack de gestion et recherche de logements. Projet en phase de conception.",
     concepts: ["Full-stack", "API REST", "Gestion de données", "UI/UX"],
     tools: ["Django", "React", "PostgreSQL", "Python"],
+    mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande code source — Saraya",
+  },
+  {
+    title: "E-Learning Platform — Laravel",
+    subtitle: "Plateforme web d'apprentissage en ligne — PHP × Laravel",
+    year: "2025", status: "Terminé", domain: "Web & Applications",
+    what: "Application web de e-learning développée avec Laravel : gestion des utilisateurs, authentification, cours, modules et base de données relationnelle. Conception orientée objet (UML) et implémentation MVC complète.",
+    concepts: ["Architecture MVC", "Authentification & rôles", "Gestion des cours", "Conception OO (UML)", "Base de données relationnelle"],
+    tools: ["PHP", "Laravel", "MySQL", "Blade", "HTML/CSS", "Bootstrap"],
+    mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande code source — E-Learning Laravel",
   },
   {
     title: "Dataviz — Netflix Titles",
@@ -125,6 +135,15 @@ const PROJECTS: Project[] = [
     github: "https://github.com/sarah832005/sdi-analysis",
     notebook: "https://github.com/sarah832005/sdi-analysis/blob/main/sdi_analysis.py",
     pbix: "https://sarah832005.github.io/docs/stream_4_pi.pbix",
+  },
+  {
+    title: "CRM & ERP — Exploration & Implémentation",
+    subtitle: "SuiteCRM open source · Installation · Fonctionnalités · Mini back-end PHP",
+    year: "2025", status: "Terminé", domain: "Systèmes d'information (SI)",
+    what: "Étude comparative CRM vs ERP : concepts, enjeux métier et différences fonctionnelles. Installation et configuration d'un CRM open source (Apache + MySQL). Exploration des modules clés : base clients centralisée, automatisation des ventes, gestion des campagnes marketing, support client et reporting. Implémentation d'un mini back-end PHP illustrant la logique CRM : authentification, CRUD contacts, tableau de bord avec statistiques.",
+    concepts: ["CRM vs ERP", "Base clients centralisée", "Automatisation des ventes", "Gestion des campagnes", "Reporting & KPIs", "Installation open source", "Back-end PHP / MySQL"],
+    tools: ["PHP", "MySQL", "Apache", "SuiteCRM", "HTML/CSS"],
+    report: "https://sarah832005.github.io/docs/crm_erp_guide.pdf",
   },
   {
     title: "Conception UML — Système orienté objet",
@@ -329,7 +348,7 @@ export default function Projects() {
               </div>
 
               {/* Links */}
-              {(p.github || p.demo || p.report || p.doc || p.notebook || p.pbix) && (
+              {(p.github || p.demo || p.report || p.doc || p.notebook || p.pbix || p.mailto) && (
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                   {p.github && <LinkButton href={p.github} label="GitHub" icon="⌥" />}
                   {p.notebook && <LinkButton href={p.notebook} label="Code Python" icon="⌨" />}
@@ -337,6 +356,7 @@ export default function Projects() {
                   {p.demo && <LinkButton href={p.demo} label="Rapport HTML" icon="⊞" />}
                   {p.report && <LinkButton href={p.report} label="PDF" icon="↓" />}
                   {p.pbix && <LinkButton href={p.pbix} label="Power BI Dashboard" icon="📊" />}
+                  {p.mailto && <LinkButton href={p.mailto} label="Demander le code" icon="✉" />}
                 </div>
               )}
             </article>
