@@ -46,6 +46,23 @@ const PROJECTS: Project[] = [
     demo: "https://sarah832005.github.io",
   },
   {
+    title: "EduDocs — Plateforme Administrative pour Étudiants Étrangers",
+    subtitle: "UX Research · Personas · Figma · Architecture 3 couches · 3 rôles",
+    year: "2026", status: "En cours", domain: "Web & Applications",
+    what: "Application web full-stack facilitant les démarches administratives des étudiants étrangers en France (logement, assurance, CAF, titre de séjour). Phase de préproduction complète : cahier des charges, personas UX (3 segments), diagramme use case UML, maquettes Figma et architecture technique. Stack : React + Node.js/Express + MySQL. 3 rôles distincts : étudiant, administration, conseiller international.",
+    concepts: ["UX Research & Personas", "Cahier des charges", "Diagramme Use Case UML", "Architecture REST 3 couches", "RBAC (rôles & permissions)", "Gestion documentaire", "Design System Figma"],
+    tools: ["React", "Node.js", "Express", "MySQL", "Figma", "TailwindCSS", "Vercel", "Render"],
+    report: "https://sarah832005.github.io/docs/edudocs_cahier_des_charges.pdf",
+  },
+  {
+    title: "Saraya — Plateforme de Gestion de Logements",
+    subtitle: "Full-stack Django × React — en conception",
+    year: "2026", status: "En cours", domain: "Web & Applications",
+    what: "Application web full-stack de gestion et recherche de logements. Projet en phase de conception.",
+    concepts: ["Full-stack", "API REST", "Gestion de données", "UI/UX"],
+    tools: ["Django", "React", "PostgreSQL", "Python"],
+  },
+  {
     title: "Dataviz — Netflix Titles",
     subtitle: "Analyse exploratoire + visualisations (rapport HTML + PDF)",
     year: "2025", status: "Terminé", domain: "Data / Stat / Dataviz",
