@@ -106,7 +106,7 @@ const PROJECTS: Project[] = [
     concepts: ["Calcul d'indices composites", "Limites planétaires", "Analyse temporelle", "Dataviz", "Développement durable", "KPIs SDG"],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Power BI", "Jupyter"],
     github: "https://github.com/sarah832005/sdi-analysis",
-    notebook: "https://github.com/sarah832005/sdi-analysis/blob/main/notebooks/",
+    notebook: "https://github.com/sarah832005/sdi-analysis/blob/main/sdi_analysis.py",
     pbix: "https://sarah832005.github.io/docs/stream_4_pi.pbix",
   },
   {
@@ -315,7 +315,7 @@ export default function Projects() {
               {(p.github || p.demo || p.report || p.doc || p.notebook || p.pbix) && (
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                   {p.github && <LinkButton href={p.github} label="GitHub" icon="⌥" />}
-                  {p.notebook && <LinkButton href={p.notebook} label="Notebook" icon="⌨" />}
+                  {p.notebook && <LinkButton href={p.notebook} label="Code Python" icon="⌨" />}
                   {p.doc && <LinkButton href={p.doc} label="Documentation" icon="⊡" />}
                   {p.demo && <LinkButton href={p.demo} label="Rapport HTML" icon="⊞" />}
                   {p.report && <LinkButton href={p.report} label="PDF" icon="↓" />}
