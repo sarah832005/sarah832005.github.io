@@ -25,7 +25,7 @@ type Domain =
 type Project = {
   title: string; subtitle: string; year: string; status: ProjectStatus;
   domain: Domain; what: string; concepts: string[]; tools: string[];
-  github?: string; demo?: string; report?: string; doc?: string; notebook?: string;
+  github?: string; demo?: string; report?: string; doc?: string; notebook?: string; pbix?: string;
 };
 
 const DOMAINS: Array<Domain | "Tous"> = [
@@ -97,6 +97,17 @@ const PROJECTS: Project[] = [
     github: "https://github.com/sarah832005/vr-cybersickness-ml",
     notebook: "https://github.com/sarah832005/vr-cybersickness-ml/blob/main/notebooks/",
     doc: "https://sarah832005.github.io/docs/vr_ml_documentation.html",
+  },
+  {
+    title: "Sustainable Development Index — Analyse SDI 2015–2019",
+    subtitle: "IEV · IE · IR · ID · IIE · 104 pays · Limites planétaires",
+    year: "2025", status: "Terminé", domain: "Data / Stat / Dataviz",
+    what: "Calcul et analyse du SDI (Hickel 2020) sur 104 pays de 2015 à 2019. Pipeline complet : calcul de 6 KPIs (IEV, IE, IR, ID, IIE, SDI), analyse du dépassement des limites planétaires CO2/empreinte matérielle, évolution temporelle et classement mondial. Visualisations Power BI incluses.",
+    concepts: ["Calcul d'indices composites", "Limites planétaires", "Analyse temporelle", "Dataviz", "Développement durable", "KPIs SDG"],
+    tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Power BI", "Jupyter"],
+    github: "https://github.com/sarah832005/sdi-analysis",
+    notebook: "https://github.com/sarah832005/sdi-analysis/blob/main/notebooks/",
+    pbix: "https://sarah832005.github.io/docs/stream_4_pi.pbix",
   },
   {
     title: "Conception UML — Système orienté objet",
@@ -301,13 +312,14 @@ export default function Projects() {
               </div>
 
               {/* Links */}
-              {(p.github || p.demo || p.report || p.doc || p.notebook) && (
+              {(p.github || p.demo || p.report || p.doc || p.notebook || p.pbix) && (
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                   {p.github && <LinkButton href={p.github} label="GitHub" icon="⌥" />}
                   {p.notebook && <LinkButton href={p.notebook} label="Notebook" icon="⌨" />}
                   {p.doc && <LinkButton href={p.doc} label="Documentation" icon="⊡" />}
                   {p.demo && <LinkButton href={p.demo} label="Rapport HTML" icon="⊞" />}
                   {p.report && <LinkButton href={p.report} label="PDF" icon="↓" />}
+                  {p.pbix && <LinkButton href={p.pbix} label="Power BI Dashboard" icon="📊" />}
                 </div>
               )}
             </article>
