@@ -96,7 +96,7 @@ const PROJECTS: Project[] = [
     tools: ["Python", "scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter"],
     github: "https://github.com/sarah832005/vr-cybersickness-ml",
     notebook: "https://github.com/sarah832005/vr-cybersickness-ml/blob/main/notebooks/",
-    doc: "https://github.com/sarah832005/vr-cybersickness-ml/tree/main/docs/docs/vr_ml_documentation.html",
+    doc: "https://github.com/sarah832005/vr-cybersickness-ml/tree/main/docs/vr_ml_documentation.html",
     
   },
   {
