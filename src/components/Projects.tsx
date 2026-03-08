@@ -20,7 +20,7 @@ type ProjectStatus = "En cours" | "Terminé";
 type Domain =
   | "Web & Applications" | "Systèmes d'information (SI)" | "Architecture & Conception"
   | "Bases de données & BI" | "Data / Stat / Dataviz" | "Maths / Stat / Probabilités"
-  | "IA / Machine Learning" | "Sécurité" | "Business / Marketing / Gestion";
+  | "IA / Machine Learning" | "Sécurité" | "Business / Marketing / Gestion" | "DevOps";
 
 type Project = {
   title: string; subtitle: string; year: string; status: ProjectStatus;
@@ -31,7 +31,7 @@ type Project = {
 const DOMAINS: Array<Domain | "Tous"> = [
   "Tous", "Web & Applications", "Systèmes d'information (SI)", "Architecture & Conception",
   "Bases de données & BI", "Data / Stat / Dataviz", "Maths / Stat / Probabilités",
-  "IA / Machine Learning", "Sécurité", "Business / Marketing / Gestion",
+  "IA / Machine Learning", "Sécurité", "DevOps", "Business / Marketing / Gestion",
 ];
 
 const PROJECTS: Project[] = [
@@ -64,13 +64,77 @@ const PROJECTS: Project[] = [
     mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande code source — Saraya",
   },
   {
-    title: "E-Learning Platform — Laravel",
-    subtitle: "Plateforme web d'apprentissage en ligne — PHP × Laravel",
+    title: "E-Learning Platform — Laravel (Edugo)",
+    subtitle: "Conception UML complète · PHP × Laravel · 3 acteurs · Diagrammes · MVC",
     year: "2025", status: "Terminé", domain: "Web & Applications",
-    what: "Application web de e-learning développée avec Laravel : gestion des utilisateurs, authentification, cours, modules et base de données relationnelle. Conception orientée objet (UML) et implémentation MVC complète.",
-    concepts: ["Architecture MVC", "Authentification & rôles", "Gestion des cours", "Conception OO (UML)", "Base de données relationnelle"],
-    tools: ["PHP", "Laravel", "MySQL", "Blade", "HTML/CSS", "Bootstrap"],
+    what: "Application web de e-learning (Edugo) développée avec Laravel : gestion des utilisateurs, authentification, cours, modules et base de données relationnelle. Conception UML complète : identification des acteurs (Étudiant, Enseignant, Admin), use case, diagrammes de séquence (authentification, ajout cours, mise à jour compte, prise de cours), diagrammes d'activité, diagramme de classes et architecture 3 couches MVC.",
+    concepts: ["Architecture MVC 3 couches", "Authentification & rôles", "Gestion des cours", "Use Case UML", "Diagrammes de séquence & activité", "Diagramme de classes", "Base de données relationnelle"],
+    tools: ["PHP", "Laravel", "MySQL", "Blade", "HTML/CSS", "Bootstrap", "StarUML"],
+    report: "https://sarah832005.github.io/docs/laravel_elearning_conception.pdf",
     mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande code source — E-Learning Laravel",
+  },
+  {
+    title: "Pet Tracker — Analyse Statistique",
+    subtitle: "Statistiques descriptives · Loi normale · Régression linéaire · Python",
+    year: "2025", status: "Terminé", domain: "Maths / Stat / Probabilités",
+    what: "Analyse statistique complète des données d'activité d'un animal équipé du collier PetTracker. Variable étudiée : distance parcourue par jour (km). Calcul de la moyenne (2,1 km), médiane, variance, écart-type (0,37 km) et étendue. Modélisation par loi normale (μ=2,1, σ=0,21), règle 68-95-99%, calculs de probabilités avec table Z. Analyse de corrélation (distance vs calories brûlées) et régression linéaire. Génération de datasets et visualisations Python.",
+    concepts: ["Statistiques descriptives", "Moyenne & médiane", "Variance & écart-type", "Loi normale", "Table Z", "Boîte à moustaches", "Corrélation & causalité", "Régression linéaire", "Nuage de points"],
+    tools: ["Python", "NumPy", "Pandas", "Matplotlib", "SciPy", "Jupyter"],
+    report: "https://sarah832005.github.io/docs/pet_tracker_stats.pdf",
+  },
+  {
+    title: "Marketing Digital — Stratégie & Analyse",
+    subtitle: "Stratégie digitale · SEO · KPIs · Campagnes · Rapport professionnel",
+    year: "2025", status: "Terminé", domain: "Business / Marketing / Gestion",
+    what: "Rapport d'analyse de stratégie marketing digital : segmentation, canaux digitaux, indicateurs de performance (KPIs), campagnes et recommandations. Étude complète des leviers d'acquisition et de fidélisation.",
+    concepts: ["Stratégie digitale", "Segmentation & ciblage", "SEO/SEM", "KPIs & analytics", "Campagnes marketing", "Content strategy"],
+    tools: ["PowerPoint", "Excel", "Google Analytics", "Canva"],
+    report: "https://sarah832005.github.io/docs/marketing_report.pdf",
+  },
+  {
+    title: "DevOps CI/CD Pipeline",
+    subtitle: "Jenkins · Docker · SonarQube · Automatisation complète",
+    year: "2025", status: "Terminé", domain: "DevOps",
+    what: "Mise en place d'un pipeline CI/CD complet : intégration continue avec Jenkins, conteneurisation Docker, analyse qualité de code avec SonarQube. Automatisation du build, des tests et du déploiement.",
+    concepts: ["CI/CD", "Intégration continue", "Conteneurisation", "Qualité de code", "Automatisation du déploiement", "Pipeline DevOps"],
+    tools: ["Jenkins", "Docker", "SonarQube", "Git", "Linux/Bash"],
+    report: "https://sarah832005.github.io/docs/devops_cicd_pipeline.pptx",
+  },
+  {
+    title: "Secure Notes — Sécurité OWASP Top 10",
+    subtitle: "Application sécurisée · Failles web · Bonnes pratiques",
+    year: "2025", status: "Terminé", domain: "Sécurité",
+    what: "Développement d'une application de notes sécurisée en respectant les recommandations OWASP Top 10. Étude et correction des principales failles web : injection SQL, XSS, CSRF, authentification défaillante, exposition de données sensibles.",
+    concepts: ["OWASP Top 10", "Injection SQL", "XSS & CSRF", "Authentification sécurisée", "Hashage & chiffrement", "Audit de sécurité", "HTTPS & headers"],
+    tools: ["Python", "Flask", "SQLite", "bcrypt", "OWASP ZAP"],
+    report: "https://sarah832005.github.io/docs/secure_notes_owasp.pdf",
+  },
+  {
+    title: "Système de Gestion de Bibliothèque — Java",
+    subtitle: "POO · Héritage · Interfaces · Design Patterns · Java",
+    year: "2025", status: "Terminé", domain: "Architecture & Conception",
+    what: "Application Java de gestion de bibliothèque : gestion des livres, membres, emprunts et retours. Implémentation orientée objet complète avec héritage, interfaces, collections et design patterns.",
+    concepts: ["Programmation orientée objet", "Héritage & polymorphisme", "Interfaces & collections", "Design Patterns", "Gestion des exceptions"],
+    tools: ["Java", "IntelliJ IDEA", "JUnit"],
+    github: "https://github.com/sarah832005/Elibrairie",
+  },
+  {
+    title: "Podcast — Deep Dive into AI Ethics",
+    subtitle: "Production audio · Script · Montage professionnel · Anglais",
+    year: "2025", status: "Terminé", domain: "Business / Marketing / Gestion",
+    what: "Réalisation d'un podcast en anglais sur l'éthique de l'intelligence artificielle : rédaction du script, enregistrement, montage audio professionnel et post-production. Travail sur la diction, le rythme et la narration en anglais.",
+    concepts: ["Scripting & storytelling", "Production audio", "Montage professionnel", "Communication orale en anglais", "Prise de parole publique"],
+    tools: ["Audacity", "Adobe Podcast", "Script writing"],
+    mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande accès — Podcast AI Ethics",
+  },
+  {
+    title: "Vidéos Pédagogiques avec IA",
+    subtitle: "Script IA · Montage · Narration · Contenu éducatif",
+    year: "2025", status: "Terminé", domain: "Business / Marketing / Gestion",
+    what: "Création de vidéos pédagogiques assistées par IA : génération de scripts avec LLMs, narration, montage vidéo et intégration de visuels générés. Format court adapté aux réseaux sociaux et à l'apprentissage en ligne.",
+    concepts: ["Prompt engineering", "Génération de contenu IA", "Montage vidéo", "Narration & storytelling", "Design pédagogique"],
+    tools: ["CapCut", "ChatGPT", "Canva", "ElevenLabs", "Adobe Express"],
+    mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande accès — Vidéos pédagogiques IA",
   },
   {
     title: "Dataviz — Netflix Titles",
