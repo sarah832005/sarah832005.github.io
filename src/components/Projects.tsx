@@ -25,7 +25,7 @@ type Domain =
 type Project = {
   title: string; subtitle: string; year: string; status: ProjectStatus;
   domain: Domain; what: string; concepts: string[]; tools: string[];
-  github?: string; demo?: string; report?: string; doc?: string; notebook?: string; pbix?: string; mailto?: string;
+  github?: string; demo?: string; report?: string; doc?: string; notebook?: string; pbix?: string; mailto?: string; video?: string;
 };
 
 const DOMAINS: Array<Domain | "Tous"> = [
@@ -126,16 +126,16 @@ const PROJECTS: Project[] = [
     what: "Réalisation d'un podcast en anglais sur l'inclusion des personnes handicapées en Tunisie (LimitLESSons). Rédaction du script, présentation du cadre APCU (Access, Penetration, Circulation, Use), enregistrement et montage audio professionnel. Travail sur la diction, le rythme et la narration en anglais.",
     concepts: ["Scripting & storytelling", "Production audio", "Montage professionnel", "Communication orale en anglais", "Cadre APCU", "Inclusion & accessibilité"],
     tools: ["Audacity", "Adobe Podcast", "Script writing"],
-    mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande accès — Podcast LimitLESSons",
+    video: "https://drive.google.com/file/d/1YzxMeh6zS_cWi9ymYCdPjbU_DXyJvfCe/view?usp=sharing",
   },
   {
-    title: "Vidéos Pédagogiques avec IA",
-    subtitle: "Activisme · IA & Éducation · Évolution technologique · Script & montage",
+    title: "Digital Voices — Activisme, IA & Technologie",
+    subtitle: "Activisme numérique · IA & Éducation · Évolution technologique · Montage vidéo",
     year: "2025", status: "Terminé", domain: "Business / Marketing / Gestion",
-    what: "Création de vidéos pédagogiques assistées par IA sur trois thématiques : l'activisme numérique, l'IA dans l'éducation, et l'évolution technologique. Génération de scripts avec LLMs, narration, montage vidéo et intégration de visuels générés par IA. Format court adapté aux réseaux sociaux et à l'apprentissage en ligne.",
+    what: "Série de vidéos sur trois thématiques : l'activisme numérique, l'IA dans l'éducation, et l'évolution technologique. Génération de scripts avec LLMs, narration, montage vidéo et intégration de visuels générés par IA.",
     concepts: ["Prompt engineering", "Génération de contenu IA", "Montage vidéo", "Narration & storytelling", "Design pédagogique", "Activisme numérique", "IA & éducation"],
     tools: ["CapCut", "ChatGPT", "Canva", "ElevenLabs", "Adobe Express"],
-    mailto: "mailto:sarahmahmoudi315@gmail.com?subject=Demande accès — Vidéos pédagogiques IA",
+    video: "https://drive.google.com/file/d/1tOtyi6BHm15fPG99dl37lP6xPFIgHyZE/view?usp=sharing",
   },
   {
     title: "Dataviz — Netflix Titles",
@@ -430,6 +430,7 @@ export default function Projects() {
                   {p.notebook && <LinkButton href={p.notebook} label="Code Python" icon="⌨" />}
                   {p.doc && <LinkButton href={p.doc} label="Documentation" icon="⊡" />}
                   {p.demo && <LinkButton href={p.demo} label="Rapport HTML" icon="⊞" />}
+                  {p.video && <LinkButton href={p.video} label="Voir / Écouter" icon="▶" />}
                   {p.report && <LinkButton href={p.report} label="PDF" icon="↓" />}
                   {p.pbix && <LinkButton href={p.pbix} label="Power BI Dashboard" icon="📊" />}
                   {p.mailto && <LinkButton href={p.mailto} label="Demander le code" icon="✉" />}
