@@ -424,7 +424,7 @@ export default function Projects() {
               </div>
 
               {/* Links */}
-              {(p.github || p.demo || p.report || p.doc || p.notebook || p.pbix || p.mailto) && (
+              {(p.github || p.demo || p.report || p.doc || p.notebook || p.pbix || p.mailto || p.video) && (
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                   {p.github && <LinkButton href={p.github} label="GitHub" icon="⌥" />}
                   {p.notebook && <LinkButton href={p.notebook} label="Code Python" icon="⌨" />}
