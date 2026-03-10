@@ -25,6 +25,7 @@ type Domain =
 type Project = {
   title: string; subtitle: string; year: string; status: ProjectStatus;
   domain: Domain; what: string; concepts: string[]; tools: string[];
+  slug: string;
   github?: string; demo?: string; report?: string; doc?: string; notebook?: string; pbix?: string; mailto?: string; video?: string;
 };
 
@@ -329,8 +330,11 @@ export default function Projects() {
 
         {/* Cards */}
         <div className="grid gap-5 md:grid-cols-2">
-          {filtered.map((p, i) => (
+          {filtered.map((p, i) => {
+            const slug = p.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 50);
+            return (
             <article
+              id={`project-${slug}`}
               key={`${p.title}-${p.year}`}
               className="rounded-2xl border border-slate-200 bg-white p-7 hover:shadow-md hover:border-slate-300 transition-all duration-300"
               style={{
@@ -437,7 +441,8 @@ export default function Projects() {
                 </div>
               )}
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
