@@ -25,7 +25,6 @@ type Domain =
 type Project = {
   title: string; subtitle: string; year: string; status: ProjectStatus;
   domain: Domain; what: string; concepts: string[]; tools: string[];
-  slug: string;
   github?: string; demo?: string; report?: string; doc?: string; notebook?: string; pbix?: string; mailto?: string; video?: string;
 };
 
